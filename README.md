@@ -1,5 +1,11 @@
 # 🚀 Telecom Customer Churn Prediction System
 
+# 🌐 Live Demo
+
+🚀 Click below to use the deployed AI application:
+
+[Telecom Customer Churn Prediction App](https://telecom-churn-prediction-by-sambodhi-dhiwar.streamlit.app/)
+
 ## 📌 Project Overview
 
 The **Telecom Customer Churn Prediction System** is a Machine Learning based web application developed to predict whether a telecom customer is likely to leave (churn) or stay with the company.
