@@ -1,6 +1,6 @@
 # 🚀 Telecom Customer Churn Prediction System
 
-# 🌐 Live Demo
+# 🌐 Website of Deployed AI Application
 
 🚀 Click below to use the deployed AI application:
 
