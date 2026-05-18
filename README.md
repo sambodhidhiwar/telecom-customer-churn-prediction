@@ -2,8 +2,10 @@
 <img width="1915" height="960" alt="image" src="https://github.com/user-attachments/assets/36e4f89c-5b33-4c8b-aed2-be23e3e8796f" />
 <br> 
 
+
 </br>
-<img width="1919" height="871" alt="image" src="https://github.com/user-attachments/assets/44bcd33a-d47d-47d3-8be4-62bee8f62ffa" />
+<img width="1918" height="897" alt="image" src="https://github.com/user-attachments/assets/79b53f33-f1c5-4bec-9807-6f01b3d3a082" />
+
 
 
 # 🌐 Website of Deployed AI Application
