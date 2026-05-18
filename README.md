@@ -1,5 +1,7 @@
 # 🚀 Telecom Customer Churn Prediction System
 <img width="1911" height="906" alt="image" src="https://github.com/user-attachments/assets/84ea4bde-42ca-4ba2-b276-c027a220bbaa" />
+<img width="1919" height="871" alt="image" src="https://github.com/user-attachments/assets/44bcd33a-d47d-47d3-8be4-62bee8f62ffa" />
+
 
 # 🌐 Website of Deployed AI Application
 
