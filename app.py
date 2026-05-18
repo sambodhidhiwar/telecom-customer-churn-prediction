@@ -1,6 +1,7 @@
 import streamlit as st
 import joblib
 import numpy as np
+import pandas as pd
 
 # ===================================
 # PAGE CONFIG
@@ -243,6 +244,99 @@ with st.sidebar:
         "No Internet Service"
     )
 
+    onlinesecurity = st.selectbox(
+        "Online Security",
+        [0,1,2],
+        format_func=lambda x:
+        "No" if x == 0 else
+        "Yes" if x == 1 else
+        "No Internet Service"
+    )
+
+    onlinebackup = st.selectbox(
+        "Online Backup",
+        [0,1,2],
+        format_func=lambda x:
+        "No" if x == 0 else
+        "Yes" if x == 1 else
+        "No Internet Service"
+    )
+
+    deviceprotection = st.selectbox(
+        "Device Protection",
+        [0,1,2],
+        format_func=lambda x:
+        "No" if x == 0 else
+        "Yes" if x == 1 else
+        "No Internet Service"
+    )
+
+    techsupport = st.selectbox(
+        "Tech Support",
+        [0,1,2],
+        format_func=lambda x:
+        "No" if x == 0 else
+        "Yes" if x == 1 else
+        "No Internet Service"
+    )
+
+    streamingtv = st.selectbox(
+        "Streaming TV",
+        [0,1,2],
+        format_func=lambda x:
+        "No" if x == 0 else
+        "Yes" if x == 1 else
+        "No Internet Service"
+    )
+
+    streamingmovies = st.selectbox(
+        "Streaming Movies",
+        [0,1,2],
+        format_func=lambda x:
+        "No" if x == 0 else
+        "Yes" if x == 1 else
+        "No Internet Service"
+    )
+
+    contract = st.selectbox(
+        "Contract Type",
+        [0,1,2],
+        format_func=lambda x:
+        "Month-to-Month" if x == 0 else
+        "One Year" if x == 1 else
+        "Two Year"
+    )
+
+    paperlessbilling = st.selectbox(
+        "Paperless Billing",
+        [0,1],
+        format_func=lambda x:
+        "No" if x == 0 else "Yes"
+    )
+
+    paymentmethod = st.selectbox(
+        "Payment Method",
+        [0,1,2,3],
+        format_func=lambda x:
+        "Electronic Check" if x == 0 else
+        "Mailed Check" if x == 1 else
+        "Bank Transfer" if x == 2 else
+        "Credit Card"
+    )
+
+    monthlycharges = st.number_input(
+        "Monthly Charges",
+        min_value=0.0,
+        max_value=150.0,
+        value=70.0
+    )
+
+# ===================================
+# AUTO TOTAL CHARGES
+# ===================================
+
+totalcharges = monthlycharges * tenure
+
 # ===================================
 # MAIN TITLE
 # ===================================
@@ -261,63 +355,77 @@ st.markdown(
 # TOP CARDS
 # ===================================
 
-col1, col2 = st.columns([2,1])
+col1, col2, col3 = st.columns(3)
 
 with col1:
 
-    st.markdown(
-        '''
-        <div class="custom-card">
+    st.markdown("""
+    <div class="custom-card">
         <div class="metric-title">Prediction Overview</div>
         <div class="metric-value">82%</div>
-        </div>
-        ''',
-        unsafe_allow_html=True
-    )
+    </div>
+    """, unsafe_allow_html=True)
 
 with col2:
 
-    st.markdown(
-        '''
-        <div class="custom-card">
+    st.markdown("""
+    <div class="custom-card">
         <div class="metric-title">Model Accuracy</div>
         <div class="metric-value">0.82</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with col3:
+
+    st.markdown(f"""
+    <div class="custom-card">
+        <div class="metric-title">Estimated Total Charges</div>
+        <div class="metric-value" style="font-size:40px;">
+        ₹ {round(totalcharges,2)}
         </div>
-        ''',
-        unsafe_allow_html=True
-    )
+    </div>
+    """, unsafe_allow_html=True)
 
 st.write("")
 
 # ===================================
-# PREDICTION BUTTON
+# CENTER BUTTON
 # ===================================
 
-if st.button("🔮 Predict Churn"):
+btn1, btn2, btn3 = st.columns([1,2,1])
 
-    input_data = np.array([[
+with btn2:
+    predict_button = st.button("🔮 Predict Churn")
 
-        gender,
-        seniorcitizen,
-        partner,
-        dependents,
-        tenure,
-        phoneservice,
-        multiplelines,
-        internetservice,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        70,
-        2000
+# ===================================
+# PREDICTION
+# ===================================
 
-    ]])
+if predict_button:
+
+    input_data = pd.DataFrame({
+
+        "gender":[gender],
+        "SeniorCitizen":[seniorcitizen],
+        "Partner":[partner],
+        "Dependents":[dependents],
+        "tenure":[tenure],
+        "PhoneService":[phoneservice],
+        "MultipleLines":[multiplelines],
+        "InternetService":[internetservice],
+        "OnlineSecurity":[onlinesecurity],
+        "OnlineBackup":[onlinebackup],
+        "DeviceProtection":[deviceprotection],
+        "TechSupport":[techsupport],
+        "StreamingTV":[streamingtv],
+        "StreamingMovies":[streamingmovies],
+        "Contract":[contract],
+        "PaperlessBilling":[paperlessbilling],
+        "PaymentMethod":[paymentmethod],
+        "MonthlyCharges":[monthlycharges],
+        "TotalCharges":[totalcharges]
+
+    })
 
     prediction = model.predict(input_data)
 
@@ -327,9 +435,7 @@ if st.button("🔮 Predict Churn"):
 
     st.write("")
 
-    # ===============================
     # RESULT CARDS
-    # ===============================
 
     col1, col2 = st.columns(2)
 
@@ -376,9 +482,7 @@ if st.button("🔮 Predict Churn"):
 
     st.write("")
 
-    # ===============================
     # FINAL RESULT
-    # ===============================
 
     if prediction[0] == 1:
 
@@ -390,9 +494,7 @@ if st.button("🔮 Predict Churn"):
 
     st.write("")
 
-    # ===============================
     # CHARTS
-    # ===============================
 
     chart_col1, chart_col2 = st.columns(2)
 
@@ -408,8 +510,8 @@ if st.button("🔮 Predict Churn"):
             ],
             "Value": [
                 tenure,
-                70,
-                2000
+                monthlycharges,
+                totalcharges
             ]
         }
 
@@ -425,3 +527,6 @@ if st.button("🔮 Predict Churn"):
         }
 
         st.bar_chart(pie_data, x="Category", y="Value")
+
+st.markdown("---")
+st.markdown("###  Developed by Sambodhi Dhiwar ")
